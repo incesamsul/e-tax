@@ -1,0 +1,28 @@
+.page-item.active .page-link {
+    color: #fff !important;
+    background-color: #FC544B !important;
+    border-color: #FC544B !important;
+}
+
+.page-link {
+    color: #FC544B !important;
+    background-color: #fff !important;
+    border: 1px solid #dee2e6 !important;
+}
+
+.page-link:hover {
+    color: #fff !important;
+    background-color: #FC544B !important;
+    border-color: #FC544B !important;
+}
+
+
+input:focus {
+    border-color: #FC544B !important;
+    /* Replace with desired color */
+}
+
+select:focus {
+    border-color: #FC544B !important;
+    outline: none;
+}
