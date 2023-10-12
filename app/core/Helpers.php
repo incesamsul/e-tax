@@ -111,4 +111,20 @@ class Helpers
             header('location: ' . BASEURL . '/pages/pages404');
         }
     }
+
+    public static function download_limpahan_saldo($files = null)
+    {
+        $file_name = $files; // replace with your file name
+        $file_path = "public/storage/limpahan_saldo/" . $file_name; // replace with your file path
+
+        if (file_exists($file_path)) {
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            header('Content-Disposition: attachment; filename=' . $file_name);
+            header('Pragma: no-cache');
+            readfile($file_path);
+            Helpers::redirectBack();
+        } else {
+            header('location: ' . BASEURL . '/pages/pages404');
+        }
+    }
 }

@@ -21,11 +21,13 @@
                 <li id="liDashboard"><a href="<?= BASEURL ?>/dashboard" class="nav-link"><i class="far fa-chart-bar"></i></i> <span>Dashboard</span></a></li>
                 <li id="liNotifikasi"><a class="nav-link" href="<?= BASEURL ?>/notifikasi"><i class="far  fa-bell"></i> <span>Notifikasi</span></a></li>
                 <li id="liLampiran"><a class="nav-link" href="<?= BASEURL ?>/lampiran"><i class="far  fa-file-alt"></i> <span>Lampiran</span></a></li>
+                <li id="liLimpahanSalso"><a class="nav-link" href="<?= BASEURL ?>/LimpahanSaldo"><i class="far  fa-file-alt"></i> <span>Limpahan Saldo</span></a></li>
                 <li id="liPajak"><a class="nav-link" href="<?= BASEURL ?>/pajak"><i class="far  fa-file-excel"></i> <span>Pajak</span></a></li>
             <?php endif; ?>
 
             <?php if ($_SESSION['login']['role'] == 'cabang' || $_SESSION['login']['role'] == 'group') : ?>
                 <li id="liNotifikasi"><a class="nav-link" href="<?= BASEURL ?>/cabang"><i class="far fa-bell"></i> <span>Notifikasi</span></a></li>
+                <li id="liLimpahanSalso"><a class="nav-link" href="<?= BASEURL ?>/LimpahanSaldo"><i class="far  fa-file-alt"></i> <span>Limpahan Saldo</span></a></li>
             <?php endif; ?>
 
         </ul>

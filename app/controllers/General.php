@@ -14,4 +14,9 @@ class General extends Controller
     {
         Helpers::download_manual_book($files);
     }
+
+    public function download_limpahan_saldo($files = null)
+    {
+        Helpers::download_limpahan_saldo($files);
+    }
 }
