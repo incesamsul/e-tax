@@ -120,13 +120,21 @@ class NotifikasiModel
 
     public function store($data)
     {
-        $id_pajak = $data['id_pajak'];
-        $deadline = $data['deadline'];
-        $cabang = $data['cabang'];
-        $query = "INSERT INTO notifikasi (id_pajak, deadline, id_user)
-        VALUES ('$id_pajak', '$deadline', '$cabang')";
-        $this->db->query($query);
-        $this->db->execute();
+
+
+        $selected = $data['selectedOptions'];
+        $selectedArr = explode(',', $selected);
+        foreach ($selectedArr as $row) {
+            $idCabang = explode('-', $row)[0];
+            $id_pajak = $data['id_pajak'];
+            $deadline = $data['deadline'];
+            $cabang = $idCabang;
+            $query = "INSERT INTO notifikasi (id_pajak, deadline, id_user)
+            VALUES ('$id_pajak', '$deadline', '$cabang')";
+            $this->db->query($query);
+            $this->db->execute();
+        }
+
         return $this->db->rowCount();
     }
 

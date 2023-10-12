@@ -35,6 +35,8 @@ class Dashboard extends Controller
         $data['declined'] = $declined;
         $data['pending'] = $pending;
         $data['cabang'] = $this->model('PenggunaModel')->getUserByRole('cabang');
+        $data['lampiran'] = $this->model('LampiranModel')->getData();
+
         $this->view('templates/header', $data);
         $this->view('templates/navbar', $data);
         $this->view('templates/sidebar');

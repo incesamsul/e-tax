@@ -52,13 +52,17 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="cabang">cabang</label>
-                                        <select required name="cabang" id="cabang" class="form-control">
+                                        <select required name="cabang" id="cabang" class="form-control" onchange="updateSelected()">
                                             <option value="">-- pilih --</option>
-                                            <?php foreach ($data['cabang'] as $cabang) :  ?>
-                                                <option <?= isset($data['id']) ? $data['edit']['id_user'] == $cabang['id'] ? 'selected' : '' : '' ?> value="<?= $cabang['id'] ?>"><?= $cabang['nama'] ?></option>
+                                            <?php foreach ($data['cabang'] as $cabang) : ?>
+                                                <option <?= isset($data['id']) ? $data['edit']['id_user'] == $cabang['id'] ? 'selected' : '' : '' ?> value="<?= $cabang['id'] . '-' . $cabang['nama']     ?>"><?= $cabang['nama'] ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
+
+                                    <div id="selectedDisplay"></div>
+                                    <input type="hidden" name="selectedOptions" id="selectedOptions" value="">
+
                                     <div class="form-grup">
                                         <button type="submit" class="btn bg-main text-white">Simpan</button>
                                     </div>

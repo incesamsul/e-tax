@@ -85,7 +85,7 @@
                                 <h4>Cabang Belum kumpul</h4>
                             </div>
                             <div class="card-body">
-                                <?= $data['declined'] ?>
+                                <?= count($data['cabang']) - count($data['lampiran']) ?>
                             </div>
                         </div>
                     </div>
@@ -100,7 +100,7 @@
                                 <h4>Cabang Sudah kumpul</h4>
                             </div>
                             <div class="card-body">
-                                <?= $data['declined'] ?>
+                                <?= count($data['lampiran']) ?>
                             </div>
                         </div>
                     </div>

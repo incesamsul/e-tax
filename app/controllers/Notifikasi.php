@@ -36,6 +36,7 @@ class Notifikasi extends Controller
         $data['liClassActive'] = 'liNotifikasi';
         $data['pajak'] = $this->model('PajakModel')->get();
         $data['cabang'] = $this->model('PenggunaModel')->getUserByRole('cabang');
+        $data['script'] = $this->script('CreateNotifikasiScript');
         $this->view('templates/header', $data);
         $this->view('templates/navbar');
         $this->view('templates/sidebar');

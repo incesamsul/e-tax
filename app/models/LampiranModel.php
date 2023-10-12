@@ -10,4 +10,11 @@ class LampiranModel
     {
         $this->db = new Database;
     }
+
+    public function getData()
+    {
+        $lampiran = "SELECT * FROM lampiran";
+        $this->db->query($lampiran);
+        return $this->db->resultSet();
+    }
 }
