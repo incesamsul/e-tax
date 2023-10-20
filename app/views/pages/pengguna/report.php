@@ -2,7 +2,7 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header shadow-none">
-            <h1>Halaman Pengguna</h1>
+            <h1>Halaman Report cabang</h1>
         </div>
 
         <div class="section-body">
@@ -12,12 +12,12 @@
                         <div class="card-header d-flex  align-items-start justify-content-between flex-row">
                             <div>
                                 <div class="d-flex flex-row">
-                                    <h4>Pengguna</h4>
+                                    <h4>Report</h4>
                                     <?php if ($_SESSION['login']['role'] == 'admin') : ?>
                                         <a href="<?= BASEURL ?>/pengguna/create" class="btn bg-main text-white"><i class="fas fa-plus"></i></a>
                                     <?php endif; ?>
                                 </div>
-                                <p>Tambah, Edit, dan Hapus Pengguna</p>
+                                <p>List cabang yang belum dan sudah kumpul </p>
                             </div>
                             <div class="d-flex">
                                 <input type="text" class="search-data-table form-control">
@@ -33,6 +33,7 @@
                                         <th>NRIK</th>
                                         <th>No. Telepon (Terdaftar di WhatsApp)</th>
                                         <th>Role</th>
+                                        <th>Keterangan</th>
                                         <?php if ($_SESSION['login']['role'] == 'admin') : ?>
                                             <th>Aksi</th>
                                         <?php endif; ?>
@@ -47,6 +48,13 @@
                                             <td><?= $row['nrik'] ?></td>
                                             <td><?= $row['no_hp'] ?></td>
                                             <td><?= $row['role'] ?></td>
+                                            <th>
+                                                <?php if ($row['status'] == '0') : ?>
+                                                    <span class="badge badge-danger">Belum kumpul</span>
+                                                <?php else : ?>
+                                                    <span class="badge badge-success">Sudah kumpul</span>
+                                                <?php endif; ?>
+                                            </th>
                                             <?php if ($_SESSION['login']['role'] == 'admin') : ?>
                                                 <td class="d-flex">
                                                     <form action="<?= BASEURL ?>/pengguna/delete" method="post" class="d-niline">

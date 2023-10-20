@@ -46,7 +46,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-sm-12">
-                    <div class="card card-statistic-2">
+                    <a href="<?= BASEURL ?>/lampiran " class="card card-statistic-2">
                         <div class="card-icon shadow-none bg-secondary">
                             <i class="far fa-file-alt"></i>
                         </div>
@@ -58,10 +58,10 @@
                                 <?= $data['pending'] ?>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-12">
-                    <div class="card card-statistic-2">
+                    <a href="<?= BASEURL ?>/cabang/list" class="card card-statistic-2">
                         <div class="card-icon shadow-none bg-success">
                             <i class="fas fa-users"></i>
                         </div>
@@ -73,10 +73,10 @@
                                 <?= count($data['cabang']) ?>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-12">
-                    <div class="card card-statistic-2">
+                    <a href="<?= BASEURL ?>/cabang/belum_kumpul" class="card card-statistic-2">
                         <div class="card-icon shadow-none bg-danger">
                             <i class="fas fa-times"></i>
                         </div>
@@ -88,10 +88,10 @@
                                 <?= count($data['cabang']) - count($data['lampiran']) ?>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-12">
-                    <div class="card card-statistic-2">
+                    <a href="<?= BASEURL ?>/cabang/sudah_kumpul" class="card card-statistic-2">
                         <div class="card-icon shadow-none bg-success">
                             <i class="fas fa-check"></i>
                         </div>
@@ -103,7 +103,22 @@
                                 <?= count($data['lampiran']) ?>
                             </div>
                         </div>
-                    </div>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-12">
+                    <a href="<?= BASEURL ?>/cabang/report" class="card card-statistic-2">
+                        <div class="card-icon shadow-none bg-primary">
+                            <i class="fas fa-list"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Report</h4>
+                            </div>
+                            <div class="card-body">
+                                <?= count($data['lampiran']) ?>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
 

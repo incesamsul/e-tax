@@ -6,13 +6,13 @@ class Cabang extends Controller
     public function __construct()
     {
         LoginCheck::isLogin();
-        RoleCheck::cekLevel(['cabang','group']);
+        RoleCheck::cekLevel(['cabang', 'group', 'akuntansi']);
         $this->notif = $this->model('NotifikasiModel')->getPerCabang($_SESSION['login']['id']);
     }
 
     public function index()
     {
-        
+
         $data['judul'] = 'notifikasi';
         $data['liClassActive'] = 'liNotifikasi';
         $data['notifikasi'] = $this->notif;
@@ -20,6 +20,60 @@ class Cabang extends Controller
         $this->view('templates/navbar', $data);
         $this->view('templates/sidebar');
         $this->view('pages/notifikasi/index', $data);
+        $this->view('templates/footer', $data);
+    }
+
+    public function list()
+    {
+
+        $data['judul'] = 'pengguna';
+        $data['liClassActive'] = 'liPengguna';
+        $data['pengguna'] = $this->model('PenggunaModel')->getUserByRole('cabang');
+        $this->view('templates/header', $data);
+        $this->view('templates/navbar');
+        $this->view('templates/sidebar');
+        $this->view('pages/pengguna/index', $data);
+        $this->view('templates/footer', $data);
+    }
+
+    public function belum_kumpul()
+    {
+
+        $data['judul'] = 'pengguna';
+        $data['liClassActive'] = 'liPengguna';
+        $data['pengguna'] = $this->model('PenggunaModel')->getUserBelumKumpul();
+        $this->view('templates/header', $data);
+        $this->view('templates/navbar');
+        $this->view('templates/sidebar');
+        $this->view('pages/pengguna/belum_kumpul', $data);
+        $this->view('templates/footer', $data);
+    }
+
+
+    public function sudah_kumpul()
+    {
+
+        $data['judul'] = 'pengguna';
+        $data['liClassActive'] = 'liPengguna';
+        $data['pengguna'] = $this->model('PenggunaModel')->getUserSudahKumpul();
+        $this->view('templates/header', $data);
+        $this->view('templates/navbar');
+        $this->view('templates/sidebar');
+        $this->view('pages/pengguna/sudah_kumpul', $data);
+        $this->view('templates/footer', $data);
+    }
+
+
+    public function report()
+    {
+
+        $data['judul'] = 'pengguna';
+        $data['liClassActive'] = 'liPengguna';
+        $data['pengguna'] = $this->model('PenggunaModel')->getReport();
+        $this->view('templates/header', $data);
+        $this->view('templates/navbar');
+        $this->view('templates/sidebar');
+        $this->view('pages/pengguna/report', $data);
         $this->view('templates/footer', $data);
     }
 

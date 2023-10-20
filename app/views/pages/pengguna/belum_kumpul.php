@@ -2,7 +2,7 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header shadow-none">
-            <h1>Halaman Pengguna</h1>
+            <h1>Halaman Cabang belum kumpul</h1>
         </div>
 
         <div class="section-body">
@@ -12,12 +12,12 @@
                         <div class="card-header d-flex  align-items-start justify-content-between flex-row">
                             <div>
                                 <div class="d-flex flex-row">
-                                    <h4>Pengguna</h4>
+                                    <h4>Cabang belum kumpul</h4>
                                     <?php if ($_SESSION['login']['role'] == 'admin') : ?>
                                         <a href="<?= BASEURL ?>/pengguna/create" class="btn bg-main text-white"><i class="fas fa-plus"></i></a>
                                     <?php endif; ?>
                                 </div>
-                                <p>Tambah, Edit, dan Hapus Pengguna</p>
+                                <p>List cabang yang belum kumpul</p>
                             </div>
                             <div class="d-flex">
                                 <input type="text" class="search-data-table form-control">

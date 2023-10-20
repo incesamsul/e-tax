@@ -79,4 +79,32 @@ class PenggunaModel
         $this->db->query($users);
         return $this->db->resultSet();
     }
+
+    public function getUserBelumKumpul()
+    {
+        $users = "SELECT *
+        FROM users
+        LEFT JOIN notifikasi ON users.id = notifikasi.id_user
+        WHERE notifikasi.id_user IS NULL AND users.role = 'cabang'";
+        $this->db->query($users);
+        return $this->db->resultSet();
+    }
+
+    public function getUserSudahKumpul()
+    {
+        $users = "SELECT *
+        FROM users JOIN notifikasi ON users.id = notifikasi.id_user ";
+        $this->db->query($users);
+        return $this->db->resultSet();
+    }
+
+    public function getReport()
+    {
+        $users = "SELECT users.*, 
+        CASE WHEN notifikasi.id_user IS NOT NULL THEN 1 ELSE 0 END AS status
+ FROM users
+ LEFT JOIN notifikasi ON users.id = notifikasi.id_user WHERE users.role = 'cabang'";
+        $this->db->query($users);
+        return $this->db->resultSet();
+    }
 }
