@@ -8,12 +8,16 @@ class Notifikasi extends Controller
         RoleCheck::cekLevel(['akuntansi']);
     }
 
-    public function index($filter = null)
+    public function index($filter = null, $jenis = 0)
     {
 
         if ($filter) {
-            $data['notifikasi'] = $this->model('NotifikasiModel')->getFiltered($filter);
-            $data['filtered'] = $filter;
+            if ($jenis) {
+                $data['notifikasi'] = $this->model('NotifikasiModel')->getPerJenis($jenis);
+            } else {
+                $data['notifikasi'] = $this->model('NotifikasiModel')->getFiltered($filter);
+                $data['filtered'] = $filter;
+            }
         } else {
             $data['notifikasi'] = $this->model('NotifikasiModel')->get();
             $data['filter'] = '';
@@ -23,6 +27,7 @@ class Notifikasi extends Controller
         $data['judul'] = 'notifikasi';
         $data['liClassActive'] = 'liNotifikasi';
         $data['script'] = $this->script('NotifikasiScript');
+        $data['pajak'] = $this->model('PajakModel')->get();
         $this->view('templates/header', $data);
         $this->view('templates/navbar');
         $this->view('templates/sidebar');

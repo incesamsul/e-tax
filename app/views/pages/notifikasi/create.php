@@ -47,6 +47,10 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
+                                        <label for="bulan">bulan</label>
+                                        <input required type="month" class="form-control" name="bulan" value="<?= isset($data['id']) ? $data['edit']['bulan'] : '' ?>">
+                                    </div>
+                                    <div class="form-group">
                                         <label for="deadline">deadline</label>
                                         <input required type="date" class="form-control" name="deadline" value="<?= isset($data['id']) ? $data['edit']['deadline'] : '' ?>">
                                     </div>
@@ -54,6 +58,9 @@
                                         <label for="cabang">cabang</label>
                                         <select required name="cabang" id="cabang" class="form-control" onchange="updateSelected()">
                                             <option value="">-- pilih --</option>
+                                            <option value="select-all">Select All</option>
+                                            <option value="deselect-all">Deselect All</option>
+
                                             <?php foreach ($data['cabang'] as $cabang) : ?>
                                                 <option <?= isset($data['id']) ? $data['edit']['id_user'] == $cabang['id'] ? 'selected' : '' : '' ?> value="<?= $cabang['id'] . '-' . $cabang['nama']     ?>"><?= $cabang['nama'] ?></option>
                                             <?php endforeach; ?>

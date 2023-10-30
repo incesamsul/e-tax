@@ -36,6 +36,7 @@ class Dashboard extends Controller
         $data['pending'] = $pending;
         $data['cabang'] = $this->model('PenggunaModel')->getUserByRole('cabang');
         $data['lampiran'] = $this->model('LampiranModel')->getData();
+        $data['pajak'] = $this->model('PajakModel')->get();
 
         $this->view('templates/header', $data);
         $this->view('templates/navbar', $data);

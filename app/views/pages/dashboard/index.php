@@ -35,6 +35,15 @@
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
+                                <div class="form-group col-sm-3">
+                                    <label for="jenis_pajak">Jenis Pajak</label>
+                                    <select name="jenis_pajak" id="jenis_pajak" class="form-control">
+                                        <option value="">-- pilih jenis_pajak --</option>
+                                        <?php foreach ($data['pajak'] as $pajak) : ?>
+                                            <option value="<?= $pajak['id'] ?>"><?= $pajak['nama_pajak'] ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
                                 <div class="form-group col-sm-12    ">
                                     <button type="submit" class="btn btn-primary">Filter</button>
                                 </div>

@@ -123,16 +123,19 @@ class NotifikasiModel
 
 
         $selected = $data['selectedOptions'];
+        $bulan = $data['bulan'];
         $selectedArr = explode(',', $selected);
         foreach ($selectedArr as $row) {
             $idCabang = explode('-', $row)[0];
             $id_pajak = $data['id_pajak'];
             $deadline = $data['deadline'];
             $cabang = $idCabang;
-            $query = "INSERT INTO notifikasi (id_pajak, deadline, id_user)
-            VALUES ('$id_pajak', '$deadline', '$cabang')";
-            $this->db->query($query);
-            $this->db->execute();
+            if ($idCabang != 'deselect') {
+                $query = "INSERT INTO notifikasi (id_pajak, deadline, id_user, bulan)
+            VALUES ('$id_pajak', '$deadline', '$cabang', '$bulan')";
+                $this->db->query($query);
+                $this->db->execute();
+            }
         }
 
         return $this->db->rowCount();
@@ -182,6 +185,13 @@ class NotifikasiModel
     public function getPerCabang($idCabang)
     {
         $notifikasi = "SELECT * FROM notifikasi WHERE id_user = '$idCabang'";
+        $this->db->query($notifikasi);
+        return $this->db->resultSet();
+    }
+
+    public function getPerJenis($id_pajak)
+    {
+        $notifikasi = "SELECT * FROM notifikasi WHERE id_pajak = '$id_pajak'";
         $this->db->query($notifikasi);
         return $this->db->resultSet();
     }

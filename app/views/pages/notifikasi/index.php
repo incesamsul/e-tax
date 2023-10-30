@@ -3,6 +3,9 @@
     <section class="section">
         <div class="section-header shadow-none">
             <h1>Halaman notifikasi <?= isset($data['filtered']) ? $data['filtered'] : '' ?></h1>
+            <?php foreach ($data['pajak'] as $pajak) : ?>
+                <a class="btn btn-outline-primary ml-2" href="<?= BASEURL ?>/notifikasi/null/<?= $pajak['id'] ?>"><?= $pajak['nama_pajak'] ?></a>
+            <?php endforeach; ?>
         </div>
 
         <div class="section-body">
