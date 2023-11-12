@@ -16,6 +16,7 @@ class Cabang extends Controller
         $data['judul'] = 'notifikasi';
         $data['liClassActive'] = 'liNotifikasi';
         $data['notifikasi'] = $this->notif;
+        $data['pajak'] = $this->model('PajakModel')->get();
         $this->view('templates/header', $data);
         $this->view('templates/navbar', $data);
         $this->view('templates/sidebar');
