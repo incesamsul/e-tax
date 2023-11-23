@@ -175,6 +175,13 @@ class NotifikasiModel
         return $this->db->resultSet();
     }
 
+    public function getByMonth($bulan)
+    {
+        $notifikasi = "SELECT * FROM notifikasi WHERE bulan = '$bulan'";
+        $this->db->query($notifikasi);
+        return $this->db->resultSet();
+    }
+
     public function getFiltered($filter)
     {
         $notifikasi = "SELECT * FROM notifikasi JOIN users ON notifikasi.id_user = users.id where users.role = '$filter'";

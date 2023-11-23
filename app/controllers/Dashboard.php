@@ -9,12 +9,15 @@ class Dashboard extends Controller
     }
 
     public function index()
-    {
+    {   
+        $url = $_GET['url'];
+        $bulan = isset(explode('/', $url)[1]) ? explode('/', $url)[1] : null;
+        
         $data['judul'] = 'dashboard';
         $data['liClassActive'] = 'liDashboard';
         $data['script'] = $this->script('DashboardScript');
         if ($_SESSION['login']['role'] == 'akuntansi') {
-            $data['notifikasi'] = $this->model('NotifikasiModel')->get();
+            $data['notifikasi'] = $this->model('NotifikasiModel')->getByMonth($bulan);
         } else {
             $data['notifikasi'] = $this->model('NotifikasiModel')->getPerCabang($_SESSION['login']['id']);
         }
@@ -34,8 +37,8 @@ class Dashboard extends Controller
         $data['verified'] = $verified;
         $data['declined'] = $declined;
         $data['pending'] = $pending;
-        $data['cabang'] = $this->model('PenggunaModel')->getUserByRole('cabang');
-        $data['lampiran'] = $this->model('LampiranModel')->getData();
+        $data['cabang'] = $this->model('NotifikasiModel')->get();
+        $data['lampiran'] = $this->model('LampiranModel')->getDataByMonth($bulan);
         $data['pajak'] = $this->model('PajakModel')->get();
 
         $this->view('templates/header', $data);

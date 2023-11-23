@@ -17,4 +17,10 @@ class LampiranModel
         $this->db->query($lampiran);
         return $this->db->resultSet();
     }
+    public function getDataByMonth($bulan)
+    {
+        $lampiran = "SELECT * FROM lampiran JOIN notifikasi on lampiran.id_notifikasi = notifikasi.id WHERE notifikasi.bulan = '$bulan'";
+        $this->db->query($lampiran);
+        return $this->db->resultSet();
+    }
 }

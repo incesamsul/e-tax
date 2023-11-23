@@ -45,7 +45,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group col-sm-12    ">
-                                    <button type="submit" class="btn btn-primary">Filter</button>
+                                    <button type="submit" class="btn btn-primary btn-filter">Filter</button>
                                 </div>
                             </form>
 
