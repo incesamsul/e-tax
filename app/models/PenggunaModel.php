@@ -80,20 +80,30 @@ class PenggunaModel
         return $this->db->resultSet();
     }
 
-    public function getUserBelumKumpul()
+    public function getUserByRolePerMonth($role,$bulan)
     {
         $users = "SELECT *
         FROM users
         LEFT JOIN notifikasi ON users.id = notifikasi.id_user
-        WHERE notifikasi.id_user IS NULL AND users.role = 'cabang'";
+        WHERE   notifikasi.bulan = '$bulan'";
         $this->db->query($users);
         return $this->db->resultSet();
     }
 
-    public function getUserSudahKumpul()
+    public function getUserBelumKumpul($bulan)
     {
         $users = "SELECT *
-        FROM users JOIN notifikasi ON users.id = notifikasi.id_user ";
+        FROM users
+        LEFT JOIN notifikasi ON users.id = notifikasi.id_user
+        WHERE   notifikasi.bulan = '$bulan'";
+        $this->db->query($users);
+        return $this->db->resultSet();
+    }
+
+    public function getUserSudahKumpul($bulan)
+    {
+        $users = "SELECT *
+        FROM users JOIN notifikasi ON users.id = notifikasi.id_user  WHERE notifikasi.bulan = '$bulan'";
         $this->db->query($users);
         return $this->db->resultSet();
     }

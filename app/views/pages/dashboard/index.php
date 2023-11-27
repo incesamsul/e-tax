@@ -22,7 +22,11 @@
                                     <select name="bulan" id="bulan" class="form-control">
                                         <option value="">-- pilih bulan --</option>
                                         <?php foreach ($dataBulan as $index => $value) : ?>
-                                            <option value="<?= $index + 1 ?>"><?= $value ?></option>
+                                            <?php if($data['bulan'] == $index + 1) : ?>
+                                                <option selected  value="<?= $index + 1 ?>"><?= $value ?></option>
+                                            <?php else : ?>
+                                                <option value="<?= $index + 1 ?>"><?= $value ?></option>
+                                            <?php endif;?>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
@@ -55,7 +59,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-sm-12">
-                    <a href="<?= BASEURL ?>/lampiran " class="card card-statistic-2">
+                    <a href="<?= BASEURL ?>/lampiran/<?= $data['bulan'] ?> " class="card card-statistic-2">
                         <div class="card-icon shadow-none bg-secondary">
                             <i class="far fa-file-alt"></i>
                         </div>
@@ -85,7 +89,7 @@
                     </a>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-12">
-                    <a href="<?= BASEURL ?>/cabang/belum_kumpul" class="card card-statistic-2">
+                    <a href="<?= BASEURL ?>/cabang/belum_kumpul/<?= $data['bulan'] ?>" class="card card-statistic-2">
                         <div class="card-icon shadow-none bg-danger">
                             <i class="fas fa-times"></i>
                         </div>
@@ -94,7 +98,7 @@
                                 <h4>Cabang Belum kumpul</h4>
                             </div>
                             <div class="card-body">
-                                <?= count($data['cabang']) - count($data['lampiran']) ?>
+                                <?= count($data['belum_kumpul']) ?>
                             </div>
                         </div>
                     </a>

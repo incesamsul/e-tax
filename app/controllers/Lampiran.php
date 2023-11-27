@@ -10,9 +10,12 @@ class Lampiran extends Controller
 
     public function index()
     {
+        $url = $_GET['url'];
+        $bulan = isset(explode('/', $url)[1]) ? explode('/', $url)[1] : null;
+        
         $data['judul'] = 'lampiran';
         $data['liClassActive'] = 'liLampiran';
-        $data['notifikasi'] = $this->model('NotifikasiModel')->get();
+        $data['notifikasi'] = $this->model('NotifikasiModel')->getByMonth($bulan);
         $this->view('templates/header', $data);
         $this->view('templates/navbar');
         $this->view('templates/sidebar');

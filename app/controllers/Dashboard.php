@@ -13,6 +13,7 @@ class Dashboard extends Controller
         $url = $_GET['url'];
         $bulan = isset(explode('/', $url)[1]) ? explode('/', $url)[1] : null;
         
+        
         $data['judul'] = 'dashboard';
         $data['liClassActive'] = 'liDashboard';
         $data['script'] = $this->script('DashboardScript');
@@ -37,10 +38,11 @@ class Dashboard extends Controller
         $data['verified'] = $verified;
         $data['declined'] = $declined;
         $data['pending'] = $pending;
-        $data['cabang'] = $this->model('NotifikasiModel')->get();
-        $data['lampiran'] = $this->model('LampiranModel')->getDataByMonth($bulan);
+        $data['cabang'] = $this->model('NotifikasiModel')->getCabang($bulan);
+        $data['lampiran'] = $this->model('PenggunaModel')->getUserSudahKumpul($bulan);
         $data['pajak'] = $this->model('PajakModel')->get();
-
+        $data['bulan'] = $bulan;
+        $data['belum_kumpul'] = $this->model('PenggunaModel')->getUserBelumKumpul($bulan);
         $this->view('templates/header', $data);
         $this->view('templates/navbar', $data);
         $this->view('templates/sidebar');

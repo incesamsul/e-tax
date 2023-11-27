@@ -26,10 +26,13 @@ class Cabang extends Controller
 
     public function list()
     {
+        $url = $_GET['url'];
+        $bulan = isset(explode('/', $url)[2]) ? explode('/', $url)[2] : null;
 
         $data['judul'] = 'pengguna';
         $data['liClassActive'] = 'liPengguna';
-        $data['pengguna'] = $this->model('PenggunaModel')->getUserByRole('cabang');
+        // $data['pengguna'] = $this->model('PenggunaModel')->getUserByRolePerMonth('cabang',$bulan);
+        $data['pengguna'] = $this->model('NotifikasiModel')->getCabang($bulan);
         $this->view('templates/header', $data);
         $this->view('templates/navbar');
         $this->view('templates/sidebar');
@@ -39,10 +42,12 @@ class Cabang extends Controller
 
     public function belum_kumpul()
     {
-
+        $url = $_GET['url'];
+        $bulan = isset(explode('/', $url)[2]) ? explode('/', $url)[2] : null;
+        
         $data['judul'] = 'pengguna';
         $data['liClassActive'] = 'liPengguna';
-        $data['pengguna'] = $this->model('PenggunaModel')->getUserBelumKumpul();
+        $data['pengguna'] = $this->model('PenggunaModel')->getUserBelumKumpul($bulan);
         $this->view('templates/header', $data);
         $this->view('templates/navbar');
         $this->view('templates/sidebar');
@@ -53,10 +58,12 @@ class Cabang extends Controller
 
     public function sudah_kumpul()
     {
+        $url = $_GET['url'];
+        $bulan = isset(explode('/', $url)[2]) ? explode('/', $url)[2] : null;
 
         $data['judul'] = 'pengguna';
         $data['liClassActive'] = 'liPengguna';
-        $data['pengguna'] = $this->model('PenggunaModel')->getUserSudahKumpul();
+        $data['pengguna'] = $this->model('PenggunaModel')->getUserSudahKumpul($bulan);
         $this->view('templates/header', $data);
         $this->view('templates/navbar');
         $this->view('templates/sidebar');
