@@ -22,11 +22,7 @@
                                     <select name="bulan" id="bulan" class="form-control">
                                         <option value="">-- pilih bulan --</option>
                                         <?php foreach ($dataBulan as $index => $value) : ?>
-                                            <?php if($data['bulan'] == $index + 1) : ?>
-                                                <option selected  value="<?= $index + 1 ?>"><?= $value ?></option>
-                                            <?php else : ?>
-                                                <option value="<?= $index + 1 ?>"><?= $value ?></option>
-                                            <?php endif;?>
+                                            <option   value="<?= $index + 1 ?>"><?= $value ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
@@ -68,13 +64,13 @@
                                 <h4>Pending</h4>
                             </div>
                             <div class="card-body">
-                                <?= $data['pending'] ?>
+                                <?= count($data['pending']) ?>
                             </div>
                         </div>
                     </a>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-12">
-                    <a href="<?= BASEURL ?>/cabang/list" class="card card-statistic-2">
+                    <a href="<?= BASEURL ?>/cabang/list/<?= $data['bulan'] ?>" class="card card-statistic-2">
                         <div class="card-icon shadow-none bg-success">
                             <i class="fas fa-users"></i>
                         </div>
@@ -98,13 +94,13 @@
                                 <h4>Cabang Belum kumpul</h4>
                             </div>
                             <div class="card-body">
-                                <?= count($data['belum_kumpul']) ?>
+                                <?= count($data['cabang']) - count($data['lampiran']) ?>
                             </div>
                         </div>
                     </a>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-12">
-                    <a href="<?= BASEURL ?>/cabang/sudah_kumpul" class="card card-statistic-2">
+                    <a href="<?= BASEURL ?>/cabang/sudah_kumpul/<?= $data['bulan'] ?>" class="card card-statistic-2">
                         <div class="card-icon shadow-none bg-success">
                             <i class="fas fa-check"></i>
                         </div>

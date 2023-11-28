@@ -37,7 +37,7 @@ class Dashboard extends Controller
 
         $data['verified'] = $verified;
         $data['declined'] = $declined;
-        $data['pending'] = $pending;
+        $data['pending'] = $this->model('LampiranModel')->getPending($bulan);
         $data['cabang'] = $this->model('NotifikasiModel')->getCabang($bulan);
         $data['lampiran'] = $this->model('PenggunaModel')->getUserSudahKumpul($bulan);
         $data['pajak'] = $this->model('PajakModel')->get();

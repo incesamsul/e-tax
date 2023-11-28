@@ -64,6 +64,7 @@ class Cabang extends Controller
         $data['judul'] = 'pengguna';
         $data['liClassActive'] = 'liPengguna';
         $data['pengguna'] = $this->model('PenggunaModel')->getUserSudahKumpul($bulan);
+        
         $this->view('templates/header', $data);
         $this->view('templates/navbar');
         $this->view('templates/sidebar');

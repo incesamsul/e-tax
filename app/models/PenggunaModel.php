@@ -92,10 +92,9 @@ class PenggunaModel
 
     public function getUserBelumKumpul($bulan)
     {
-        $users = "SELECT *
-        FROM users
-        LEFT JOIN notifikasi ON users.id = notifikasi.id_user
-        WHERE   notifikasi.bulan = '$bulan'";
+        $users = "SELECT * from  notifikasi JOIN users on notifikasi.id_user = users.id
+        left join lampiran on notifikasi.id = lampiran.id_notifikasi
+        WHERE   notifikasi.bulan = '$bulan' and lampiran.id is null";
         $this->db->query($users);
         return $this->db->resultSet();
     }
@@ -103,7 +102,7 @@ class PenggunaModel
     public function getUserSudahKumpul($bulan)
     {
         $users = "SELECT *
-        FROM users JOIN notifikasi ON users.id = notifikasi.id_user  WHERE notifikasi.bulan = '$bulan'";
+        FROM lampiran JOIN notifikasi ON lampiran.id_notifikasi = notifikasi.id join users on notifikasi.id_user = users.id  WHERE notifikasi.bulan = '$bulan'";
         $this->db->query($users);
         return $this->db->resultSet();
     }

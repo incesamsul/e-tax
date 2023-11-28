@@ -15,7 +15,11 @@ class Lampiran extends Controller
         
         $data['judul'] = 'lampiran';
         $data['liClassActive'] = 'liLampiran';
-        $data['notifikasi'] = $this->model('NotifikasiModel')->getByMonth($bulan);
+        if($bulan) {
+            $data['notifikasi'] = $this->model('LampiranModel')->getDataByMonth($bulan);
+        } else {
+            $data['notifikasi'] = $this->model('LampiranModel')->getData();
+        }
         $this->view('templates/header', $data);
         $this->view('templates/navbar');
         $this->view('templates/sidebar');
