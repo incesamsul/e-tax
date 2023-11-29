@@ -90,19 +90,22 @@ class PenggunaModel
         return $this->db->resultSet();
     }
 
-    public function getUserBelumKumpul($bulan)
+    public function getUserBelumKumpul($bulan, $jenisPajak)
     {
         $users = "SELECT * from  notifikasi JOIN users on notifikasi.id_user = users.id
         left join lampiran on notifikasi.id = lampiran.id_notifikasi
-        WHERE   notifikasi.bulan = '$bulan' and lampiran.id is null";
+         join pajak on notifikasi.id_pajak = pajak.id
+        WHERE   notifikasi.bulan = '$bulan' and lampiran.id is null
+        and nama_pajak = '$jenisPajak'";
         $this->db->query($users);
         return $this->db->resultSet();
     }
 
-    public function getUserSudahKumpul($bulan)
+    public function getUserSudahKumpul($bulan, $jenisPajak)
     {
         $users = "SELECT *
-        FROM lampiran JOIN notifikasi ON lampiran.id_notifikasi = notifikasi.id join users on notifikasi.id_user = users.id  WHERE notifikasi.bulan = '$bulan'";
+        FROM lampiran JOIN notifikasi ON lampiran.id_notifikasi = notifikasi.id join users on notifikasi.id_user = users.id 
+        join pajak on notifikasi.id_pajak = pajak.id WHERE notifikasi.bulan = '$bulan' and nama_pajak = '$jenisPajak'";
         $this->db->query($users);
         return $this->db->resultSet();
     }

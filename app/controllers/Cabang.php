@@ -44,10 +44,11 @@ class Cabang extends Controller
     {
         $url = $_GET['url'];
         $bulan = isset(explode('/', $url)[2]) ? explode('/', $url)[2] : null;
+        $jenisPajak = isset(explode('/', $url)[3]) ? explode('/', $url)[3] : null;
         
         $data['judul'] = 'pengguna';
         $data['liClassActive'] = 'liPengguna';
-        $data['pengguna'] = $this->model('PenggunaModel')->getUserBelumKumpul($bulan);
+        $data['pengguna'] = $this->model('PenggunaModel')->getUserBelumKumpul($bulan, $jenisPajak);
         $this->view('templates/header', $data);
         $this->view('templates/navbar');
         $this->view('templates/sidebar');
@@ -60,10 +61,11 @@ class Cabang extends Controller
     {
         $url = $_GET['url'];
         $bulan = isset(explode('/', $url)[2]) ? explode('/', $url)[2] : null;
+        $jenisPajak = isset(explode('/', $url)[3]) ? explode('/', $url)[3] : null;
 
         $data['judul'] = 'pengguna';
         $data['liClassActive'] = 'liPengguna';
-        $data['pengguna'] = $this->model('PenggunaModel')->getUserSudahKumpul($bulan);
+        $data['pengguna'] = $this->model('PenggunaModel')->getUserSudahKumpul($bulan, $jenisPajak);
         
         $this->view('templates/header', $data);
         $this->view('templates/navbar');

@@ -3,5 +3,6 @@ $('.btn-filter').on('click', function (e) {
     let bulan = $('#bulan').val();
     let tahun = $('#tahun').val();
     let filterBulan = tahun + '-' + bulan;
-    document.location.href = '/e-tax/dashboard/' + filterBulan;
+    let jenis = $('#jenis_pajak').val();
+    document.location.href = '/e-tax/dashboard/' + filterBulan + '/' + jenis;
 })

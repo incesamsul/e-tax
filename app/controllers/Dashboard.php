@@ -12,6 +12,7 @@ class Dashboard extends Controller
     {   
         $url = $_GET['url'];
         $bulan = isset(explode('/', $url)[1]) ? explode('/', $url)[1] : null;
+        $jenisPajak = isset(explode('/', $url)[2]) ? explode('/', $url)[2] : null;
         
         
         $data['judul'] = 'dashboard';
@@ -37,12 +38,13 @@ class Dashboard extends Controller
 
         $data['verified'] = $verified;
         $data['declined'] = $declined;
-        $data['pending'] = $this->model('LampiranModel')->getPending($bulan);
+        $data['pending'] = $this->model('LampiranModel')->getPending($bulan, $jenisPajak);
         $data['cabang'] = $this->model('NotifikasiModel')->getCabang($bulan);
-        $data['lampiran'] = $this->model('PenggunaModel')->getUserSudahKumpul($bulan);
+        $data['lampiran'] = $this->model('PenggunaModel')->getUserSudahKumpul($bulan, $jenisPajak);
         $data['pajak'] = $this->model('PajakModel')->get();
         $data['bulan'] = $bulan;
-        $data['belum_kumpul'] = $this->model('PenggunaModel')->getUserBelumKumpul($bulan);
+        $data['jenisPajak'] = $jenisPajak;
+        // $data['belum_kumpul'] = $this->model('PenggunaModel')->getUserBelumKumpul($bulan, $jenisPajak);
         $this->view('templates/header', $data);
         $this->view('templates/navbar', $data);
         $this->view('templates/sidebar');

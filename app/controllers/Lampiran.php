@@ -12,11 +12,12 @@ class Lampiran extends Controller
     {
         $url = $_GET['url'];
         $bulan = isset(explode('/', $url)[1]) ? explode('/', $url)[1] : null;
+        $jenisPajak = isset(explode('/', $url)[2]) ? explode('/', $url)[2] : null;
         
         $data['judul'] = 'lampiran';
         $data['liClassActive'] = 'liLampiran';
         if($bulan) {
-            $data['notifikasi'] = $this->model('LampiranModel')->getDataByMonth($bulan);
+            $data['notifikasi'] = $this->model('LampiranModel')->getDataByMonth($bulan, $jenisPajak);
         } else {
             $data['notifikasi'] = $this->model('LampiranModel')->getData();
         }
