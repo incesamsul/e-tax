@@ -17,8 +17,9 @@
                                 $dataBulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
                                 $dataTahun = ['2021', '2022', '2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030'];
 
-                                $_tahun = explode('-',$data['bulan'])[0];
-                                $_bulan = explode('-',$data['bulan'])[1];
+                                $bulanArr = $data['bulan'];
+                                $_tahun = explode('-', isset($bulanArr[0]) ? $bulanArr[0] : '');
+                                $_bulan = explode('-',isset($bulanArr[1]) ? $bulanArr[1] : '');
 
                                 ?>
                                 <div class="form-group col-sm-3">
