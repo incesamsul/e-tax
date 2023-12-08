@@ -18,9 +18,17 @@
                                 $dataTahun = ['2021', '2022', '2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030'];
 
                                 $bulanArr = $data['bulan'];
-                                $_tahun = explode('-', isset($bulanArr[0]) ? $bulanArr[0] : '');
-                                $_bulan = explode('-',isset($bulanArr[1]) ? $bulanArr[1] : '');
-
+                                
+                                $expBulan = explode('-', $bulanArr);
+                                
+                                if(count($expBulan) > 1){
+                                    $_tahun = $expBulan[0];
+                                    $_bulan = $expBulan[1];
+                                }else{
+                                    $_tahun = date('Y');
+                                    $_bulan = date('m');
+                                }
+                                
                                 ?>
                                 <div class="form-group col-sm-3">
                                     <label for="bulan">Bulan</label>
@@ -120,7 +128,7 @@
                     </a>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-12">
-                    <a href="<?= BASEURL ?>/cabang/report" class="card card-statistic-2">
+                    <a href="<?= BASEURL ?>/cabang/report/<?= $data['bulan'] ?>/<?= $data['jenisPajak']?>" class="card card-statistic-2">
                         <div class="card-icon shadow-none bg-primary">
                             <i class="fas fa-list"></i>
                         </div>

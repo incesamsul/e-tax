@@ -77,10 +77,13 @@ class Cabang extends Controller
 
     public function report()
     {
+        $url = $_GET['url'];
+        $bulan = isset(explode('/', $url)[2]) ? explode('/', $url)[2] : null;
+        $jenisPajak = isset(explode('/', $url)[3]) ? explode('/', $url)[3] : null;
 
         $data['judul'] = 'pengguna';
         $data['liClassActive'] = 'liPengguna';
-        $data['pengguna'] = $this->model('PenggunaModel')->getReport();
+        $data['pengguna'] = $this->model('PenggunaModel')->getReport($bulan, $jenisPajak);
         $this->view('templates/header', $data);
         $this->view('templates/navbar');
         $this->view('templates/sidebar');

@@ -110,12 +110,16 @@ class PenggunaModel
         return $this->db->resultSet();
     }
 
-    public function getReport()
+    public function getReport($bulan, $jenisPajak)
     {
         $users = "SELECT users.*, 
         CASE WHEN notifikasi.id_user IS NOT NULL THEN 1 ELSE 0 END AS status
- FROM users
- LEFT JOIN notifikasi ON users.id = notifikasi.id_user WHERE users.role = 'cabang'";
+        FROM users
+        LEFT JOIN notifikasi ON users.id = notifikasi.id_user
+        JOIN pajak ON notifikasi.id_pajak = pajak.id
+        WHERE users.role = 'cabang' 
+        AND notifikasi.bulan = '$bulan' 
+        AND pajak.nama_pajak = '$jenisPajak'";
         $this->db->query($users);
         return $this->db->resultSet();
     }
