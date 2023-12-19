@@ -4,6 +4,7 @@
         <div class="section-header shadow-none">
             <h1>Halaman notifikasi <?= isset($data['filtered']) ? $data['filtered'] : '' ?></h1>
             
+            
             <?php foreach ($data['pajak'] as $pajak) : ?>
                 <a class="btn btn-outline-primary ml-2" href="<?= BASEURL ?>/notifikasi/null/<?= $pajak['id'] ?>"><?= $pajak['nama_pajak'] ?></a>
             <?php endforeach; ?>
@@ -29,7 +30,7 @@
                             </div>
                             <div class="d-flex align-items-center justify-content-center">
                                 <input type="text" class="search-data-table form-control">
-                                <?php if ($_SESSION['login']['role'] == 'pajak') : ?>
+                                <?php if ($_SESSION['login']['role'] == 'akuntansi') : ?>
                                     <button onclick="confirm('kirim email ? ')" class="btn bg-main text-white ml-2 text-nowrap" id="btnSendEmails"><i class="fas fa-envelope"></i> send all</button>
                                     <a href="<?= BASEURL ?>/notifikasi/cabang" class="btn btn-info ml-2">Cabang</a>
                                     <a href="<?= BASEURL ?>/notifikasi/group" class="btn btn-primary ml-2">Group</a>
