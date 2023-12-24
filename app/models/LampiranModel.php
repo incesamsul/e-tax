@@ -24,10 +24,10 @@ class LampiranModel
         $this->db->query($lampiran);
         return $this->db->resultSet();
     }
-    
+
     public function getDataByMonth($bulan, $jenisPajak)
     {
-        $lampiran = "SELECT * FROM lampiran JOIN notifikasi on lampiran.id_notifikasi = notifikasi.id JOIN pajak on notifikasi.id_pajak = pajak.id WHERE notifikasi.bulan = '$bulan' and nama_pajak = '$jenisPajak'";
+        $lampiran = "SELECT * FROM lampiran JOIN notifikasi on lampiran.id_notifikasi = notifikasi.id JOIN pajak on notifikasi.id_pajak = pajak.id WHERE notifikasi.bulan = '$bulan' and nama_pajak = '$jenisPajak' and verifikasi = '0'";
         $this->db->query($lampiran);
         return $this->db->resultSet();
     }

@@ -17,7 +17,8 @@
                                 <p>Daftar Lampiran</p>
                             </div>
                             <div class="d-flex">
-                                <input type="text" class="search-data-table form-control">
+                                <input type="date" class="search-date-table form-control">
+                                <input type="text" class="search-data-table form-control ml-2">
                             </div>
                         </div>
                         <div class="card-body table-responsive">

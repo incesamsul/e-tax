@@ -56,7 +56,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="cabang">cabang</label>
-                                        <select required name="cabang" id="cabang" class="form-control" onchange="updateSelected()">
+                                        <select required name="cabang" id="cabang" class="form-control select2" onchange="updateSelected()">
                                             <option value="">-- pilih --</option>
                                             <option value="select-all">Select All</option>
                                             <option value="deselect-all">Deselect All</option>

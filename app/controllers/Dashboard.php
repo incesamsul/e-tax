@@ -9,12 +9,12 @@ class Dashboard extends Controller
     }
 
     public function index()
-    {   
+    {
         $url = $_GET['url'];
         $bulan = isset(explode('/', $url)[1]) ? explode('/', $url)[1] : null;
         $jenisPajak = isset(explode('/', $url)[2]) ? explode('/', $url)[2] : null;
-        
-        
+
+
         $data['judul'] = 'dashboard';
         $data['liClassActive'] = 'liDashboard';
         $data['script'] = $this->script('DashboardScript');
@@ -40,7 +40,7 @@ class Dashboard extends Controller
         $data['declined'] = $declined;
         $data['pending'] = $this->model('LampiranModel')->getPending($bulan, $jenisPajak);
         $data['cabang'] = $this->model('NotifikasiModel')->getCabang($bulan);
-        $data['lampiran'] = $this->model('PenggunaModel')->getUserSudahKumpul($bulan, $jenisPajak);
+        $data['lampiran'] = $this->model('PenggunaModel')->getReport($bulan, $jenisPajak);
         $data['pajak'] = $this->model('PajakModel')->get();
         $data['bulan'] = $bulan;
         $data['jenisPajak'] = $jenisPajak;

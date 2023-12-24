@@ -32,6 +32,7 @@
 <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
     $('#' + '<?= $data["liClassActive"] ?>').addClass('active');
     let dataTable = $('.data-table').DataTable({
@@ -39,12 +40,20 @@
         dom: 'Bfrtip',
         buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
+        ],
+        stateSave: true
     });
 
 
     $('.search-data-table').on('keyup', function() {
         dataTable.search(this.value).draw();
+    });
+
+    $('.search-date-table').on('change', function() {
+        dataTable.search(this.value).draw();
+    });
+    $(document).ready(function() {
+        $('.select2').select2();
     });
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" integrity="sha512-HCG6Vbdg4S+6MkKlMJAm5EHJDeTZskUdUMTb8zNcUKoYNDteUQ0Zig30fvD9IXnRv7Y0X4/grKCnNoQ21nF2Qw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
