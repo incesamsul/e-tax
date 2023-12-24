@@ -18,17 +18,17 @@
                                 $dataTahun = ['2021', '2022', '2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030'];
 
                                 $bulanArr = $data['bulan'];
-                                
+
                                 $expBulan = explode('-', $bulanArr);
-                                
-                                if(count($expBulan) > 1){
+
+                                if (count($expBulan) > 1) {
                                     $_tahun = $expBulan[0];
                                     $_bulan = $expBulan[1];
-                                }else{
+                                } else {
                                     $_tahun = date('Y');
                                     $_bulan = date('m');
                                 }
-                                
+
                                 ?>
                                 <div class="form-group col-sm-3">
                                     <label for="bulan">Bulan</label>
@@ -68,7 +68,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-sm-12">
-                    <a href="<?= BASEURL ?>/lampiran/<?= $data['bulan'] ?>/<?= $data['jenisPajak']?> " class="card card-statistic-2">
+                    <a href="<?= BASEURL ?>/lampiran/<?= $data['bulan'] ?>/<?= $data['jenisPajak'] ?> " class="card card-statistic-2">
                         <div class="card-icon shadow-none bg-secondary">
                             <i class="far fa-file-alt"></i>
                         </div>
@@ -83,7 +83,7 @@
                     </a>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-12">
-                    <a href="<?= BASEURL ?>/cabang/list/<?= $data['bulan'] ?>/<?= $data['jenisPajak']?>" class="card card-statistic-2">
+                    <a href="<?= BASEURL ?>/cabang/list/<?= $data['bulan'] ?>/<?= $data['jenisPajak'] ?>" class="card card-statistic-2">
                         <div class="card-icon shadow-none bg-success">
                             <i class="fas fa-users"></i>
                         </div>
@@ -98,7 +98,7 @@
                     </a>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-12">
-                    <a href="<?= BASEURL ?>/cabang/belum_kumpul/<?= $data['bulan'] ?>/<?= $data['jenisPajak']?>" class="card card-statistic-2">
+                    <a href="<?= BASEURL ?>/cabang/belum_kumpul/<?= $data['bulan'] ?>/<?= $data['jenisPajak'] ?>" class="card card-statistic-2">
                         <div class="card-icon shadow-none bg-danger">
                             <i class="fas fa-times"></i>
                         </div>
@@ -107,13 +107,13 @@
                                 <h4>Cabang Belum kumpul</h4>
                             </div>
                             <div class="card-body">
-                                <?= count($data['cabang']) - count($data['lampiran']) ?>
+                                <?= count($data['belum_kumpul']) ?>
                             </div>
                         </div>
                     </a>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-12">
-                    <a href="<?= BASEURL ?>/cabang/sudah_kumpul/<?= $data['bulan'] ?>/<?= $data['jenisPajak']?>" class="card card-statistic-2">
+                    <a href="<?= BASEURL ?>/cabang/sudah_kumpul/<?= $data['bulan'] ?>/<?= $data['jenisPajak'] ?>" class="card card-statistic-2">
                         <div class="card-icon shadow-none bg-success">
                             <i class="fas fa-check"></i>
                         </div>
@@ -122,13 +122,13 @@
                                 <h4>Cabang Sudah kumpul</h4>
                             </div>
                             <div class="card-body">
-                                <?= count($data['lampiran']) ?>
+                                <?= count($data['sudah_kumpul']) ?>
                             </div>
                         </div>
                     </a>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-12">
-                    <a href="<?= BASEURL ?>/cabang/report/<?= $data['bulan'] ?>/<?= $data['jenisPajak']?>" class="card card-statistic-2">
+                    <a href="<?= BASEURL ?>/cabang/report/<?= $data['bulan'] ?>/<?= $data['jenisPajak'] ?>" class="card card-statistic-2">
                         <div class="card-icon shadow-none bg-primary">
                             <i class="fas fa-list"></i>
                         </div>

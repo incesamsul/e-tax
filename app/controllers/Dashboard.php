@@ -44,7 +44,9 @@ class Dashboard extends Controller
         $data['pajak'] = $this->model('PajakModel')->get();
         $data['bulan'] = $bulan;
         $data['jenisPajak'] = $jenisPajak;
-        // $data['belum_kumpul'] = $this->model('PenggunaModel')->getUserBelumKumpul($bulan, $jenisPajak);
+        $data['belum_kumpul'] = $this->model('PenggunaModel')->getUserBelumKumpul($bulan, $jenisPajak);
+        $data['sudah_kumpul'] = $this->model('PenggunaModel')->getUserSudahKumpul($bulan, $jenisPajak);
+
         $this->view('templates/header', $data);
         $this->view('templates/navbar', $data);
         $this->view('templates/sidebar');
