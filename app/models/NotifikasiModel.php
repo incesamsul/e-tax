@@ -238,7 +238,7 @@ class NotifikasiModel
         $queryNotif = "SELECT * FROM notifikasi WHERE id = '$id'";
         $this->db->query($queryNotif);
         $resultNotif = $this->db->single();
-        $email = NotifikasiOrm::cabang($resultNotif['id_user'])['email'];
+        $recipient = NotifikasiOrm::cabang($resultNotif['id_user'])['email'];
         $body = 'file lampiran di tolak karena ' . $alasan;
         $query = "UPDATE notifikasi
         SET verifikasi = '2',
@@ -247,7 +247,12 @@ class NotifikasiModel
         $this->db->query($query);
         $this->db->execute();
 
-        Helpers::sendEmail('Notifikasi e-tax', $email, $body);
+        $body = urlencode($body);
+
+        $scriptId = "AKfycbzupui2Dea8ucTQ9TQmnIuekHcTvegeAC5caABAmp8MsZgJbrqATuncCGNKdCJ1z3HrGA";
+        $apiUrl = "https://script.google.com/macros/s/AKfycbyheiuwVuSHCZ1N2UZ5dLp8QQRC-Y3vdpj465u9RIvJjs1TKGWFYZtl1rb6m7LC_XldeA/exec?recipient={$recipient}&body={$body}";
+
+        $response = file_get_contents($apiUrl);
 
         return $this->db->rowCount();
     }
@@ -272,58 +277,30 @@ class NotifikasiModel
         $pajak = NotifikasiOrm::pajak($data['id_pajak'])['nama_pajak'];
         $lampiran = NotifikasiOrm::pajak($data['id_pajak'])['lampiran'];
         $deadline = $data['deadline'];
-        $emailUser = NotifikasiOrm::cabang($data['id_user'])['email'];
-
-
-        // API endpoint for sending email
-        $url = 'https://api.elasticemail.com/v2/email/send';
-
-        // Your Elastic Email API key
-        $apiKey = '0C8B93672DEFD79E0087B28C5CF054653F46EF25330851E40CE966BDC7BFF8A8E69C3BA783366143A8AE0ED002590D56';
-
-        // Recipient email address
-        $to = $emailUser;
-
-        // Sender email address
-        $from = 'info@samtam.tech';
-
-        // Email subject
-        $subject = 'Notifikasi upload lampiran untuk ' . $pajak;
+        $recipient = NotifikasiOrm::cabang($data['id_user'])['email'];
 
         // Email body
         // $body = 'Tolong upload ' . $lampiran . ' sebelum ' . $deadline;
-        $body = 'Pengisian ' . $pajak . ' Cabang.<br><br>';
-        $body .= 'Salam.<br>';
-        $body .= 'Kepada yang terhormat Bapak/Ibu.<br>';
-        $body .= 'Kami dari Departemen Perpajakan Korporasi Grup Akuntansi dan Keuangan, dengan ini mohon kepada Bapak/Ibu agar segera melaporkan daftar ' . $pajak . ' Cabang ke dalam website E-TAX. Terima kasih.<br><br>';
-        $body .= 'Notes: NIK waiib disi apabila tidak memiliki NPWP.<br><br>';
-        $body .= 'Salam hormat,<br>';
-        $body .= 'Dept. Perpajakan Korporasi <br>';
-        $body .= 'Grup Akuntansi dan Keuangan <br>';
-        $body .= 'Jl. Suryopranoto No. 8 Lt.6 <br>';
-        $body .= 'Jakarta Pusat (10130)<br>';
+        $body = 'Pengisian ' . $pajak . ' Cabang.' . PHP_EOL . PHP_EOL;
+        $body .= 'Salam.' . PHP_EOL;
+        $body .= 'Kepada yang terhormat Bapak/Ibu.' . PHP_EOL;
+        $body .= 'Kami dari Departemen Perpajakan Korporasi Grup Akuntansi dan Keuangan, dengan ini mohon kepada Bapak/Ibu agar segera melaporkan daftar ' . $pajak . ' Cabang ke dalam website E-TAX. Terima kasih.' . PHP_EOL . PHP_EOL;
+        $body .= 'Notes: NIK wajib disi apabila tidak memiliki NPWP.' . PHP_EOL . PHP_EOL;
+        $body .= 'Salam hormat,' . PHP_EOL;
+        $body .= 'Dept. Perpajakan Korporasi' . PHP_EOL;
+        $body .= 'Grup Akuntansi dan Keuangan' . PHP_EOL;
+        $body .= 'Jl. Suryopranoto No. 8 Lt.6' . PHP_EOL;
+        $body .= 'Jakarta Pusat (10130)' . PHP_EOL;
 
+        $body = urlencode($body);
 
-        // Compose email data
-        $data = [
-            'apikey' => $apiKey,
-            'to' => $to,
-            'from' => $from, // Specify sender email address here
-            'subject' => $subject,
-            'body' => $body,
-        ];
+        $scriptId = "AKfycbzupui2Dea8ucTQ9TQmnIuekHcTvegeAC5caABAmp8MsZgJbrqATuncCGNKdCJ1z3HrGA";
+        $apiUrl = "https://script.google.com/macros/s/AKfycbyheiuwVuSHCZ1N2UZ5dLp8QQRC-Y3vdpj465u9RIvJjs1TKGWFYZtl1rb6m7LC_XldeA/exec?recipient={$recipient}&body={$body}";
 
-        // Send POST request to Elastic Email API
-        $response = json_decode(file_get_contents($url, false, stream_context_create([
-            'http' => [
-                'method' => 'POST',
-                'header' => 'Content-Type: application/x-www-form-urlencoded',
-                'content' => http_build_query($data),
-            ],
-        ])), true);
+        $response = file_get_contents($apiUrl);
 
         // Check response for success or error
-        if ($response && isset($response['success']) && $response['success'] === true) {
+        if ($response) {
             $query = "UPDATE notifikasi
             SET email_sended = '1'
             WHERE id = '$id'";
@@ -334,6 +311,79 @@ class NotifikasiModel
             return 'Failed to send email. Error: ' . $response['error'];
         }
     }
+
+    // public function email($data)
+    // {
+    //     // LINK APPSCRIPT https://script.google.com/macros/s/AKfycbyheiuwVuSHCZ1N2UZ5dLp8QQRC-Y3vdpj465u9RIvJjs1TKGWFYZtl1rb6m7LC_XldeA/exec
+
+    //     $data = json_decode($_POST['email'], true);
+
+    //     $id = $data['id'];
+    //     $pajak = NotifikasiOrm::pajak($data['id_pajak'])['nama_pajak'];
+    //     $lampiran = NotifikasiOrm::pajak($data['id_pajak'])['lampiran'];
+    //     $deadline = $data['deadline'];
+    //     $emailUser = NotifikasiOrm::cabang($data['id_user'])['email'];
+
+
+    //     // API endpoint for sending email
+    //     $url = 'https://api.elasticemail.com/v2/email/send';
+
+    //     // Your Elastic Email API key
+    //     $apiKey = '0C8B93672DEFD79E0087B28C5CF054653F46EF25330851E40CE966BDC7BFF8A8E69C3BA783366143A8AE0ED002590D56';
+
+    //     // Recipient email address
+    //     $to = $emailUser;
+
+    //     // Sender email address
+    //     $from = 'info@samtam.tech';
+
+    //     // Email subject
+    //     $subject = 'Notifikasi upload lampiran untuk ' . $pajak;
+
+    //     // Email body
+    //     // $body = 'Tolong upload ' . $lampiran . ' sebelum ' . $deadline;
+    //     $body = 'Pengisian ' . $pajak . ' Cabang.<br><br>';
+    //     $body .= 'Salam.<br>';
+    //     $body .= 'Kepada yang terhormat Bapak/Ibu.<br>';
+    //     $body .= 'Kami dari Departemen Perpajakan Korporasi Grup Akuntansi dan Keuangan, dengan ini mohon kepada Bapak/Ibu agar segera melaporkan daftar ' . $pajak . ' Cabang ke dalam website E-TAX. Terima kasih.<br><br>';
+    //     $body .= 'Notes: NIK waiib disi apabila tidak memiliki NPWP.<br><br>';
+    //     $body .= 'Salam hormat,<br>';
+    //     $body .= 'Dept. Perpajakan Korporasi <br>';
+    //     $body .= 'Grup Akuntansi dan Keuangan <br>';
+    //     $body .= 'Jl. Suryopranoto No. 8 Lt.6 <br>';
+    //     $body .= 'Jakarta Pusat (10130)<br>';
+
+
+    //     // Compose email data
+    //     $data = [
+    //         'apikey' => $apiKey,
+    //         'to' => $to,
+    //         'from' => $from, // Specify sender email address here
+    //         'subject' => $subject,
+    //         'body' => $body,
+    //     ];
+
+    //     // Send POST request to Elastic Email API
+    //     $response = json_decode(file_get_contents($url, false, stream_context_create([
+    //         'http' => [
+    //             'method' => 'POST',
+    //             'header' => 'Content-Type: application/x-www-form-urlencoded',
+    //             'content' => http_build_query($data),
+    //         ],
+    //     ])), true);
+
+    //     // Check response for success or error
+    //     if ($response && isset($response['success']) && $response['success'] === true) {
+    //         $query = "UPDATE notifikasi
+    //         SET email_sended = '1'
+    //         WHERE id = '$id'";
+    //         $this->db->query($query);
+    //         $this->db->execute();
+    //         return 'email berhasil terkirim!';
+    //     } else {
+    //         return 'Failed to send email. Error: ' . $response['error'];
+    //     }
+    // }
 
     public function emails($data)
     {
@@ -349,16 +399,28 @@ class NotifikasiModel
             $lampiran = NotifikasiOrm::pajak($row['id_pajak'])['lampiran'];
             $deadline = $row['deadline'];
             $emailUser = NotifikasiOrm::cabang($row['id_user'])['email'];
-            $body = 'Pengisian ' . $pajak . ' Cabang.<br><br>';
-            $body .= 'Salam.<br>';
-            $body .= 'Kepada yang terhormat Bapak/Ibu.<br>';
-            $body .= 'Kami dari Departemen Perpajakan Korporasi Grup Akuntansi dan Keuangan, dengan ini mohon kepada Bapak/Ibu agar segera melaporkan daftar ' . $pajak . ' Cabang ke dalam website E-TAX. Terima kasih.<br><br>';
-            $body .= 'Notes: NIK waiib disi apabila tidak memiliki NPWP.<br><br>';
-            $body .= 'Salam hormat,<br>';
-            $body .= 'Dept. Perpajakan Korporasi <br>';
-            $body .= 'Grup Akuntansi dan Keuangan <br>';
-            $body .= 'Jl. Suryopranoto No. 8 Lt.6 <br>';
-            $body .= 'Jakarta Pusat (10130)<br>';
+
+            // Email body
+            // $body = 'Tolong upload ' . $lampiran . ' sebelum ' . $deadline;
+            $body = 'Pengisian ' . $pajak . ' Cabang.' . PHP_EOL . PHP_EOL;
+            $body .= 'Salam.' . PHP_EOL;
+            $body .= 'Kepada yang terhormat Bapak/Ibu.' . PHP_EOL;
+            $body .= 'Kami dari Departemen Perpajakan Korporasi Grup Akuntansi dan Keuangan, dengan ini mohon kepada Bapak/Ibu agar segera melaporkan daftar ' . $pajak . ' Cabang ke dalam website E-TAX. Terima kasih.' . PHP_EOL . PHP_EOL;
+            $body .= 'Notes: NIK wajib disi apabila tidak memiliki NPWP.' . PHP_EOL . PHP_EOL;
+            $body .= 'Salam hormat,' . PHP_EOL;
+            $body .= 'Dept. Perpajakan Korporasi' . PHP_EOL;
+            $body .= 'Grup Akuntansi dan Keuangan' . PHP_EOL;
+            $body .= 'Jl. Suryopranoto No. 8 Lt.6' . PHP_EOL;
+            $body .= 'Jakarta Pusat (10130)' . PHP_EOL;
+
+            $body = urlencode($body);
+
+            $scriptId = "AKfycbzupui2Dea8ucTQ9TQmnIuekHcTvegeAC5caABAmp8MsZgJbrqATuncCGNKdCJ1z3HrGA";
+            $apiUrl = "https://script.google.com/macros/s/AKfycbyheiuwVuSHCZ1N2UZ5dLp8QQRC-Y3vdpj465u9RIvJjs1TKGWFYZtl1rb6m7LC_XldeA/exec?recipient={$emailUser}&body={$body}";
+
+            $response = file_get_contents($apiUrl);
+
+
             $query = "UPDATE notifikasi
             SET email_sended = '1'
             WHERE id = '$id'";
