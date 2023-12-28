@@ -53,7 +53,7 @@
                                     <select name="jenis_pajak" id="jenis_pajak" class="form-control">
                                         <option value="">-- pilih jenis_pajak --</option>
                                         <?php foreach ($data['pajak'] as $pajak) : ?>
-                                            <option <?= $pajak['nama_pajak'] == $data['jenisPajak'] ? 'selected' : '' ?> value="<?= $pajak['nama_pajak'] ?>"><?= $pajak['nama_pajak'] ?></option>
+                                            <option <?= $pajak['nama_pajak'] == $data['jenisPajak'] ? 'selected' : '' ?> value="<?= $pajak['nama_pajak'] ?>"><?= $pajak['full_name'] ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
