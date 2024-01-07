@@ -49,6 +49,7 @@
                                             <td><?= $row['no_hp'] ?></td>
                                             <td><?= $row['role'] ?></td>
                                             <th>
+
                                                 <?php if ($row['status'] == '0') : ?>
                                                     <span class="badge badge-danger">Belum kumpul</span>
                                                 <?php else : ?>

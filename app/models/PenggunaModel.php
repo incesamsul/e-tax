@@ -80,7 +80,7 @@ class PenggunaModel
         return $this->db->resultSet();
     }
 
-    public function getUserByRolePerMonth($role,$bulan)
+    public function getUserByRolePerMonth($role, $bulan)
     {
         $users = "SELECT *
         FROM users
@@ -113,9 +113,10 @@ class PenggunaModel
     public function getReport($bulan, $jenisPajak)
     {
         $users = "SELECT users.*, 
-        CASE WHEN notifikasi.id_user IS NOT NULL THEN 1 ELSE 0 END AS status
+        CASE WHEN lampiran.id IS NOT NULL THEN 1 ELSE 0 END AS status
         FROM users
         LEFT JOIN notifikasi ON users.id = notifikasi.id_user
+        LEFT JOIN lampiran ON notifikasi.id = lampiran.id_notifikasi
         JOIN pajak ON notifikasi.id_pajak = pajak.id
         WHERE users.role = 'cabang' 
         AND notifikasi.bulan = '$bulan' 
