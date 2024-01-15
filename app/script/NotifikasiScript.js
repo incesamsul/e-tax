@@ -1,4 +1,7 @@
 $(document).ready(function () {
+
+
+
     $("#checkAll").click(function () {
         $(".checkItem").prop("checked", $(this).prop("checked"));
     });

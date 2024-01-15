@@ -30,6 +30,8 @@
                             </div>
                             <div class="d-flex align-items-center justify-content-center">
                                 <input type="date" class="search-date-table form-control">
+                                <input type="date" class="search-date-table2 ml-2 form-control">
+                                <button class="btn bg-main text-white ml-2 text-nowrap" id="btnFilter"><i class="fas fa-filter"></i> Filter</button>
                                 <input type="text" class="search-data-table form-control ml-2">
                                 <?php if ($_SESSION['login']['role'] == 'akuntansi') : ?>
                                     <button onclick="confirm('kirim email ? ')" class="btn bg-main text-white ml-2 text-nowrap" id="btnSendEmails"><i class="fas fa-envelope"></i> send all</button>

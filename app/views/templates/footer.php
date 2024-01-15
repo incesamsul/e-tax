@@ -1,5 +1,6 @@
 <footer class="main-footer border-0">
     <div class="footer-left">
+        page : <?= $data['judul'] ?>
         Copyright &copy; 2023 <div class="bullet"></div> made by <a href="https://bankdki.id/">Bank DKI</a>
     </div>
     <div class="footer-right">
@@ -45,17 +46,45 @@
     });
 
 
-    $('.search-data-table').on('keyup', function() {
-        dataTable.search(this.value).draw();
-    });
+    // $('.search-data-table').on('keyup', function() {
+    //     dataTable.search(this.value).draw();
+    // });
 
-    $('.search-date-table').on('change', function() {
-        dataTable.search(this.value).draw();
+    // $('.search-date-table').on('change', function() {
+    //     dataTable.search(this.value).draw();
+    // });
+
+
+    $('#btn-filter-lampiran').on('click', function() {
+        alert('what')
     });
     $(document).ready(function() {
         $('.select2').select2();
     });
 </script>
+<?php if ($data['judul'] == 'notifikasi') : ?>
+    <script>
+        $('#btnFilter').on('click', function() {
+            let startDate = $('.search-date-table').val();
+            let endDate = $('.search-date-table2').val();
+            window.location.href = '<?= $data['url'] ?>/' + startDate + '/' + endDate
+        });
+    </script>
+<?php endif; ?>
+
+<?php if ($data['judul'] == 'lampiran') : ?>
+    <script>
+        $('#jenis_pajak').on('change', function() {
+            dataTable.search(this.value).draw();
+        });
+
+        $('#btnFilter').on('click', function() {
+            let startDate = $('.search-date-table').val();
+            let endDate = $('.search-date-table2').val();
+            window.location.href = '<?= $data['url'] ?>/' + startDate + '/' + endDate
+        });
+    </script>
+<?php endif; ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" integrity="sha512-HCG6Vbdg4S+6MkKlMJAm5EHJDeTZskUdUMTb8zNcUKoYNDteUQ0Zig30fvD9IXnRv7Y0X4/grKCnNoQ21nF2Qw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <?= isset($data['script']) ? $data['script'] : '' ?>

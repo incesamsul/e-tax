@@ -13,14 +13,31 @@ class Lampiran extends Controller
         $url = $_GET['url'];
         $bulan = isset(explode('/', $url)[1]) ? explode('/', $url)[1] : null;
         $jenisPajak = isset(explode('/', $url)[2]) ? explode('/', $url)[2] : null;
-        
+
         $data['judul'] = 'lampiran';
         $data['liClassActive'] = 'liLampiran';
-        if($bulan) {
+        if ($bulan) {
             $data['notifikasi'] = $this->model('LampiranModel')->getDataByMonth($bulan, $jenisPajak);
         } else {
             $data['notifikasi'] = $this->model('LampiranModel')->getData();
         }
+        $data['filter'] = false;
+        $this->view('templates/header', $data);
+        $this->view('templates/navbar');
+        $this->view('templates/sidebar');
+        $this->view('pages/lampiran/index', $data);
+        $this->view('templates/footer', $data);
+    }
+
+    public function filter($tglAwal = null, $tglAkhir = null)
+    {
+
+        $data['judul'] = 'lampiran';
+        $data['liClassActive'] = 'liLampiran';
+        $data['notifikasi'] = $this->model('LampiranModel')->getDataFiltered($tglAwal, $tglAkhir);
+        $data['filter'] = true;
+        $data['url'] = BASEURL . '/lampiran/filter/';
+        $data['pajak'] = $this->model('PajakModel')->get();
         $this->view('templates/header', $data);
         $this->view('templates/navbar');
         $this->view('templates/sidebar');

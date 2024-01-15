@@ -17,7 +17,21 @@
                                 <p>Daftar Lampiran</p>
                             </div>
                             <div class="d-flex">
-                                <input type="date" class="search-date-table form-control">
+
+                                <?php if ($data['filter']) : ?>
+                                    <a class="btn bg-main text-white mr-2" href="<?= BASEURL ?>/lampiran">back</a>
+                                    <select name="jenis_pajak" id="jenis_pajak" class="mx-3" style="border:none; brder-radius:5px;">
+                                        <option value="">-- pilih jenis_pajak --</option>
+                                        <?php foreach ($data['pajak'] as $pajak) : ?>
+                                            <option value="<?= $pajak['nama_pajak'] ?>"><?= $pajak['full_name'] ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <input type="date" class="search-date-table form-control">
+                                    <input type="date" class="search-date-table2 ml-2 form-control">
+                                    <button class="btn bg-main text-white ml-2 text-nowrap" id="btnFilter"><i class="fas fa-filter"></i> Filter</button>
+                                <?php else : ?>
+                                    <a class="btn bg-main text-white" href="<?= BASEURL ?>/lampiran/filter">filter</a>
+                                <?php endif; ?>
                                 <input type="text" class="search-data-table form-control ml-2">
                             </div>
                         </div>

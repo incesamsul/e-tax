@@ -189,23 +189,35 @@ class NotifikasiModel
         return $this->db->resultSet();
     }
 
-    public function getFiltered($filter)
+    public function getFiltered($filter, $tglAwal = null, $tglAkhir = null)
     {
-        $notifikasi = "SELECT * FROM notifikasi JOIN users ON notifikasi.id_user = users.id where users.role = '$filter'";
+        if ($tglAwal == null && $tglAkhir == null) {
+            $notifikasi = "SELECT * FROM notifikasi JOIN users ON notifikasi.id_user = users.id where users.role = '$filter'";
+        } else {
+            $notifikasi = "SELECT * FROM notifikasi JOIN users ON notifikasi.id_user = users.id where users.role = '$filter' AND deadline BETWEEN '$tglAwal' AND '$tglAkhir'";
+        }
+
         $this->db->query($notifikasi);
         return $this->db->resultSet();
     }
 
     public function getPerCabang($idCabang)
     {
+
         $notifikasi = "SELECT * FROM notifikasi WHERE id_user = '$idCabang'";
         $this->db->query($notifikasi);
         return $this->db->resultSet();
     }
 
-    public function getPerJenis($id_pajak)
+    public function getPerJenis($id_pajak, $tglAwal = null, $tglAkhir = null)
     {
-        $notifikasi = "SELECT * FROM notifikasi WHERE id_pajak = '$id_pajak'";
+
+        if ($tglAwal == null && $tglAkhir == null) {
+            $notifikasi = "SELECT * FROM notifikasi WHERE id_pajak = '$id_pajak'";
+        } else {
+            $notifikasi = "SELECT * FROM notifikasi WHERE id_pajak = '$id_pajak' AND deadline BETWEEN '$tglAwal' AND '$tglAkhir'";
+        }
+
         $this->db->query($notifikasi);
         return $this->db->resultSet();
     }
