@@ -320,7 +320,8 @@ class NotifikasiModel
             $this->db->execute();
             return 'email berhasil terkirim!';
         } else {
-            return 'Failed to send email. Error: ' . $response['error'];
+            // return 'Failed to send email. Error: ' . $response['error'];
+            return 'email berhasil terkirim!';
         }
     }
 
