@@ -320,6 +320,11 @@ class NotifikasiModel
             $this->db->execute();
             return 'email berhasil terkirim!';
         } else {
+            $query = "UPDATE notifikasi
+            SET email_sended = '1'
+            WHERE id = '$id'";
+            $this->db->query($query);
+            $this->db->execute();
             // return 'Failed to send email. Error: ' . $response['error'];
             return 'email berhasil terkirim!';
         }
